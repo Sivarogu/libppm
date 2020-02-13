@@ -1,4 +1,7 @@
 use std::fmt::{self, Formatter, Display};
+use std::path::Path;
+use std::fs::File;
+use std::io::{Write, BufReader};
 
 #[derive(Clone, Copy)]
 pub struct Pixel {
@@ -8,8 +11,8 @@ pub struct Pixel {
 }
 
 pub struct Image {
-    file: Vec<Pixel>,
-    heigth: usize,
+    content: Vec<Pixel>,
+    height: usize,
     width: usize
 }
 
@@ -46,6 +49,10 @@ impl Pixel {
         self.g = gray;
         self.b = gray;
     }
+    
+    fn to_slice(&self) -> [u8; 3] {
+        [self.r, self.g, self.b]
+    }
 }
 
 impl PartialEq for Pixel {
@@ -62,6 +69,31 @@ impl Display for Pixel {
             format!("{:01$x}", self.g, 2),
             format!("{:01$x}", self.b, 2))
     }
+}
+
+impl Image {
+    fn save(&self, filename: &Path) -> std::io::Result<()> {
+        let mut file = File::create(filename)?;
+        let header = format!("P6 {} {} 255\n", self.width, self.height);
+        file.write(header.as_bytes())?;
+
+        // TODO - Vérifier si c'est assez rapide et si le format est ok
+        for pixel in &self.content {
+            file.write(&pixel.to_slice())?;
+        }
+
+        Ok(())
+    }
+}
+
+fn new_with_file(filename: &Path) -> Image {
+    let f = File::open(filename);
+    let buffer = BufReader::new(f.unwrap());
+
+    // Check if file has good ppm format: "P6" then height width then max color value then data
+    // and ignore comments
+
+    Image {content: Vec::new(), height: 0, width: 0}
 }
 
 fn main() {
