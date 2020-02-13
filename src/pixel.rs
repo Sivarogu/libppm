@@ -8,7 +8,7 @@ pub struct Pixel {
 }
 
 impl Pixel {
-    fn new(red: u8, green: u8, blue: u8) -> Pixel {
+    pub fn new(red: u8, green: u8, blue: u8) -> Pixel {
         Pixel {
             r: red,
             g: green,
