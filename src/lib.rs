@@ -5,7 +5,7 @@ use std::io::{Write, BufReader};
 use std::io::prelude::*;
 
 mod pixel;
-use self::pixel::Pixel;
+pub use self::pixel::Pixel;
 
 #[derive(Debug)]
 enum PPMType {
