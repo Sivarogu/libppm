@@ -1,6 +1,5 @@
 use std::fmt::{self, Formatter, Display};
-extern crate colored;
-use colored::*;
+
 /// # Pixel is a part of an [Image](struct.Image.html)
 ///The pixel is compose of 3 shades of color, red, blue and green (RGB)
 #[derive(Debug, Clone, Copy)]
@@ -78,10 +77,7 @@ impl PartialEq for Pixel {
 ///Return the pixel structur pixel in RGB and it's reference in the memory
 impl Display for Pixel {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        write!(f, "{0}{1}{2} ({3}, {4}, {5}) 0x{6}{7}{8}",
-            "R".red().bold(),
-            "G".green().bold(),
-            "B".blue().bold(),
+        write!(f, "RGB ({0}, {1}, {2}) 0x{3}{4}{5}",
             self.r, self.g, self.b,
             format!("{:01$x}", self.r, 2),
             format!("{:01$x}", self.g, 2),

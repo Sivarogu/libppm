@@ -1,6 +1,5 @@
 extern crate ppm;
 use ppm::Pixel;
-use ppm::dummy;
 
 #[test]
 ///test the fonction that return red, green and blue shape 
@@ -52,9 +51,9 @@ fn test_grayscale_two_pixel()
 
     pixel.grayscale(2);
 
-    assert_eq!(211, pixel.red());
-    assert_eq!(211, pixel.blue());
-    assert_eq!(211, pixel.green());
+    assert_eq!(213, pixel.red());
+    assert_eq!(213, pixel.blue());
+    assert_eq!(213, pixel.green());
 
 }
 
@@ -78,9 +77,4 @@ fn test_create_pixel() {
     let pixel2 = Pixel::new(201, 230, 210);
 
     assert_eq!(pixel2, pixel);
-}
-
-#[test]
-fn test_dummy() {
-    assert_eq!(dummy(), 42);
 }

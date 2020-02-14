@@ -3,15 +3,9 @@ extern crate test;
 extern crate ppm;
 
 use test::Bencher;
-use ppm::dummy;
 use ppm::Pixel;
 use std::path::Path;
 
-
-#[bench]
-fn bench_dummy(b: &mut Bencher) {
-    b.iter(|| dummy());
-}
 
 #[bench]
 fn create_low_image(b: &mut Bencher) {
@@ -94,52 +88,31 @@ fn flip_medium_image(b: &mut Bencher) {
     let mut image = ppm::new_with_file(path);
     b.iter(|| ppm::flip(&mut image));
 }
-
 #[bench]
 fn bench_invert_method(b: &mut Bencher) {
 
-    let mut pixel = Pixel {
-        r: 201,
-        g: 230,
-        b: 210
-    };
-
+    let mut pixel = Pixel::new(201, 230, 210);
     b.iter(|| pixel.invert());
 }
 
 #[bench]
 fn bench_grayscale_method_one(b: &mut Bencher) {
 
-    let mut pixel = Pixel {
-        r: 201,
-        g: 230,
-        b: 210
-    };
-
+    let mut pixel = Pixel::new(201, 230, 210);
     b.iter(|| pixel.grayscale(1));
 }
 
 #[bench]
 fn bench_grayscale_method_two(b: &mut Bencher) {
 
-    let mut pixel = Pixel {
-        r: 201,
-        g: 230,
-        b: 210
-    };
-
+    let mut pixel = Pixel::new(201, 230, 210);
     b.iter(|| pixel.grayscale(2));
 }
 
 #[bench]
 fn bench_grayscale_method_three(b: &mut Bencher) {
 
-    let mut pixel = Pixel {
-        r: 201,
-        g: 230,
-        b: 210
-    };
-
+    let mut pixel = Pixel::new(201, 230, 210);
     b.iter(|| pixel.grayscale(3));
 }
 
@@ -147,4 +120,3 @@ fn bench_grayscale_method_three(b: &mut Bencher) {
 fn bench_create_pixel(b: &mut Bencher) {
     b.iter(|| Pixel::new(201, 230, 210));
 }
-

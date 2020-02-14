@@ -4,11 +4,6 @@ use std::fs::{File, create_dir_all};
 use std::io::{Write, BufReader};
 use std::io::prelude::*;
 
-extern crate libc;
-extern crate c_string;
-use libc::{c_char, c_int};
-use std::ffi::{CStr, CString};
-
 mod pixel;
 pub use self::pixel::Pixel;
 
@@ -36,7 +31,7 @@ pub struct Image {
 impl Image {
     /// # Example:
     /// ```
-    /// let output_path = Path::new("./images/output/P3/custom.ascii.ppm");
+    /// let output_path = Path::new("./path_to_image.ppm");
     /// image.save(output_path).unwrap();
     /// ```
     pub fn new(image_type: PPMType, height: usize, width: usize, nb_color: usize, content: Vec<Pixel>) -> Image {
@@ -275,14 +270,4 @@ fn read_p3_file(buffer: &mut BufReader<File>) -> Image {
         width: width,
         nb_color: nb_color
     }
-}
-
-///Return 42. It is exposed and can be use in other language like Python.
-/// # Example:
-/// ```
-/// return 42;
-/// ```
-#[no_mangle]
-pub extern fn dummy() -> u8{
-    return 42;
 }
