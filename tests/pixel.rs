@@ -6,11 +6,7 @@ use ppm::dummy;
 ///test the fonction that return red, green and blue shape 
 fn test_struct_pixel()
 {
-    let pixel = Pixel {
-        r: 201,
-        g: 230,
-        b: 210
-    };
+    let pixel = Pixel::new(201, 230, 210);
 
     assert_eq!(pixel.red(), 201);
     assert_eq!(pixel.green(), 230);
@@ -23,11 +19,7 @@ fn test_struct_pixel()
 fn test_invert_pixel()
 {
 
-    let mut pixel = Pixel {
-        r: 201,
-        g: 230,
-        b: 210
-    };
+    let mut pixel = Pixel::new(201, 230, 210);
 
     pixel.invert();
 
@@ -42,11 +34,7 @@ fn test_invert_pixel()
 fn test_grayscale_one_pixel()
 {
 
-    let mut pixel = Pixel {
-        r: 201,
-        g: 230,
-        b: 210
-    };
+    let mut pixel = Pixel::new(201, 230, 210);
 
     pixel.grayscale(1);
 
@@ -60,11 +48,7 @@ fn test_grayscale_one_pixel()
 fn test_grayscale_two_pixel()
 {
 
-    let mut pixel = Pixel {
-        r: 201,
-        g: 230,
-        b: 210
-    };
+    let mut pixel = Pixel::new(201, 230, 210);
 
     pixel.grayscale(2);
 
@@ -78,11 +62,7 @@ fn test_grayscale_two_pixel()
 fn test_grayscale_three_pixel()
 {
 
-    let mut pixel = Pixel {
-        r: 201,
-        g: 230,
-        b: 210
-    };
+    let mut pixel = Pixel::new(201, 230, 210);
 
     pixel.grayscale(0);
 
@@ -93,46 +73,14 @@ fn test_grayscale_three_pixel()
 }
 
 #[test]
-///test the fonction slice pixel
-fn test_to_slice_pixel()
-{
-
-    let mut pixel = Pixel {
-        r: 201,
-        g: 230,
-        b: 210
-    };
-
-    pixel.to_slice();
-
-    assert_eq!(201, pixel.red());
-    assert_eq!(210, pixel.blue());
-    assert_eq!(230, pixel.green());
-
-}
-
-#[test]
-fn test_create_pixel()
-{
-
-    let mut pixel = Pixel {
-        r: 201,
-        g: 230,
-        b: 210
-    };
-
-
+fn test_create_pixel() {
+    let pixel = Pixel::new(201, 230, 210);
     let pixel2 = Pixel::new(201, 230, 210);
 
     assert_eq!(pixel2, pixel);
-
-
 }
 
 #[test]
-fn test_dummy()
-{
-
+fn test_dummy() {
     assert_eq!(dummy(), 42);
-
 }

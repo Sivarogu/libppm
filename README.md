@@ -1,15 +1,36 @@
 # libppm
 
-_**TODO:** Update this README.md`_
+Collaborators: COUSIN Cecile, DELAUNAY Clement, DEPRAZ Clement, GIANOTTI Mathias
 
-1) fork the project
+## Usage
 
-2) push an existing repository from the command line
 
+
+## Documentation
+
+This project includes documentation. To see it, launch from root directory:
+```shell
+cargo doc --open
 ```
-git remote add origin git@github.com:USERNAME/libppm.git
-git push -u origin master
+
+## Tests and benchmarks
+
+This project includes some unit tests and benchmarks. To run them, use respectively from root directory:
+```shell
+cargo test
+cargo bench
 ```
-https://github.com/rust-esgi/IABD1/blob/master/src/big_project.md
-http://netpbm.sourceforge.net/doc/ppm.html
-https://doc.rust-lang.org/std/cmp/trait.PartialEq.html
+
+## Code practices and bonus features
+
+Best practices:
+- Project architecture: https://learning-rust.github.io/docs/a4.cargo,crates_and_basic_project_structure.html#Project-Structure
+- Documentation
+- Unit tests
+- Benchmarks
+- Examples
+
+Bonuses:
+- Add new image methods: downscale and flip
+- Add colors in terminal when displaying objects
+- Add several methods to compute grayscale

@@ -31,6 +31,16 @@ pub struct Image {
 }
 ///Implement an Image 
 impl Image {
+    pub fn new(image_type: PPMType, height: usize, width: usize, nb_color: usize, content: Vec<Pixel>) -> Pixel {
+        Image {
+            image_type,
+            height,
+            width: usize,
+            nb_color: usize,
+            content: Vec<Pixel>,
+        }
+    }
+
     pub fn save(&self, filename: &Path) -> std::io::Result<()> {
         create_dir_all(filename.parent().unwrap())?;
         let mut file = File::create(filename)?;
