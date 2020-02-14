@@ -13,7 +13,7 @@ mod pixel;
 pub use self::pixel::Pixel;
 
 #[derive(Debug, Copy, Clone)]
-enum PPMType {
+pub enum PPMType {
     // P1, // ascii Portable Bit Map
     // P2, // ascii Portable Gray Map
     P3, // ascii Portable Pixel Map
@@ -31,13 +31,13 @@ pub struct Image {
 }
 ///Implement an Image 
 impl Image {
-    pub fn new(image_type: PPMType, height: usize, width: usize, nb_color: usize, content: Vec<Pixel>) -> Pixel {
+    pub fn new(image_type: PPMType, height: usize, width: usize, nb_color: usize, content: Vec<Pixel>) -> Image {
         Image {
-            image_type,
-            height,
-            width: usize,
-            nb_color: usize,
-            content: Vec<Pixel>,
+            image_type: image_type,
+            height: height,
+            width: width,
+            nb_color: nb_color,
+            content: content
         }
     }
 

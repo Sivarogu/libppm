@@ -1,7 +1,12 @@
 [package]
 name = "ppm"
 version = "0.1.0"
-authors = ["Clément Depraz <clem.depraz@gmail.com>"]
+authors = [
+    "Clément Delaunay",
+    "Mathias Gianotti",
+    "Cécile Cousin",
+    "Clément Depraz"
+]
 edition = "2018"
 
 [lib]
