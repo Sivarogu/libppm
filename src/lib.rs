@@ -21,7 +21,7 @@ enum PPMType {
     // P5, // binary Portable Gray Map
     // P6, // binary Portable Pixel Map
 }
-
+///An Image is compose of Pixel
 pub struct Image {
     image_type: PPMType,
     height: usize,
@@ -29,7 +29,7 @@ pub struct Image {
     nb_color: usize,
     content: Vec<Pixel>,
 }
-
+///Implement an Image 
 impl Image {
     pub fn save(&self, filename: &Path) -> std::io::Result<()> {
         create_dir_all(filename.parent().unwrap())?;
@@ -179,7 +179,7 @@ pub fn flip(image: &mut Image) -> Image {
         nb_color: image.nb_color
     }
 }
-
+///it's the fonction to clear line
 fn clean_line(line: String) -> String {
     line.split('#').collect::<Vec<&str>>()[0].trim().to_string()
 }
@@ -223,7 +223,7 @@ fn read_p3_file(buffer: &mut BufReader<File>) -> Image {
         nb_color: nb_color
     }
 }
-
+///it's our function that return 42 it's executed in a python
 #[no_mangle]
 pub extern fn dummy() -> u8{
     return 42;

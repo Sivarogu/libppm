@@ -2,6 +2,7 @@ extern crate ppm;
 use ppm::Pixel;
 
 #[test]
+///test the fonction that return red, green and blue shape 
 fn test_struct_pixel()
 {
     let pixel = Pixel {
@@ -17,6 +18,7 @@ fn test_struct_pixel()
 }
 
 #[test]
+///test the fonction that invert pixel color
 fn test_invert_pixel()
 {
 
@@ -35,6 +37,7 @@ fn test_invert_pixel()
 }
 
 #[test]
+///test functions that put pixel in gray scale
 fn test_grayscale1_pixel()
 {
 
@@ -89,6 +92,7 @@ fn test_grayscale3_pixel()
 }
 
 #[test]
+///test the fonction slice pixel
 fn test_to_slice_pixel()
 {
 
