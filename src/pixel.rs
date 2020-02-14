@@ -2,9 +2,9 @@ use std::fmt::{self, Formatter, Display};
 
 #[derive(Debug, Clone, Copy)]
 pub struct Pixel {
-    r: u8,
-    g: u8,
-    b: u8
+    pub r: u8,
+    pub g: u8,
+    pub b: u8
 }
 
 impl Pixel {
@@ -34,11 +34,38 @@ impl Pixel {
         self.b = !self.b;
     }
 
-    pub fn grayscale(&mut self) {
-        let gray = (0.21 * self.r as f32 + 0.72 * self.g as f32 + 0.07 * self.b as f32) as u8;
-        self.r = gray;
-        self.g = gray;
-        self.b = gray;
+    pub fn grayscale(&mut self, methode: u8) {
+
+        if methode == 1 {
+
+            let gray = (0.21 * self.r as f32 + 0.72 * self.g as f32 + 0.07 * self.b as f32) as u8;
+            self.r = gray;
+            self.g = gray;
+            self.b = gray;
+
+        }
+        else if methode == 2 {
+
+            let gray = (0.33 * self.r as f32 + 0.33 * self.g as f32 + 0.33 * self.b as f32) as u8;
+            self.r = gray;
+            self.g = gray;
+            self.b = gray;
+
+        }
+        else {
+
+            let items = [self.r, self.g, self.b];
+
+            let (min, max) = items
+                             .iter()
+                             .fold((items[0], items[0]), |acc, &x| (acc.0.min(x), acc.1.max(x)));
+
+            let gray = ((max as f32 + min as f32) * 0.50) as u8;
+            self.r = gray;
+            self.g = gray;
+            self.b = gray;
+
+        }
     }
     
     pub fn to_slice(&self) -> [u8; 3] {
