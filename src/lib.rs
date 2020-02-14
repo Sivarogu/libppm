@@ -4,6 +4,11 @@ use std::fs::{File, create_dir_all};
 use std::io::{Write, BufReader};
 use std::io::prelude::*;
 
+extern crate libc;
+extern crate c_string;
+use libc::{c_char, c_int};
+use std::ffi::{CStr, CString};
+
 mod pixel;
 pub use self::pixel::Pixel;
 
@@ -104,4 +109,9 @@ fn read_p3_file(buffer: &mut BufReader<File>) -> Image {
     }
 
     Image {image_type: PPMType::P3, content: Vec::new(), height: height, width: width, nb_color: nb_color}
+}
+
+#[no_mangle]
+pub extern fn dummy() -> u8{
+    return 42;
 }
