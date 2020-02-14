@@ -21,7 +21,10 @@ pub enum PPMType {
     // P5, // binary Portable Gray Map
     // P6, // binary Portable Pixel Map
 }
-///An Image is compose of Pixel
+
+/// # Image is compose of [Pixel](struct.Pixel.html)
+/// An Image can have different type of PPM, Ascii or binary. Here we focus on P3, which is an Ascii Portable Pixel Map. 
+/// It is composed of a width, a height and the number of color in this image.
 pub struct Image {
     image_type: PPMType,
     height: usize,
@@ -29,8 +32,13 @@ pub struct Image {
     nb_color: usize,
     content: Vec<Pixel>,
 }
-///Implement an Image 
+
 impl Image {
+    /// # Example:
+    /// ```
+    /// let output_path = Path::new("./images/output/P3/custom.ascii.ppm");
+    /// image.save(output_path).unwrap();
+    /// ```
     pub fn new(image_type: PPMType, height: usize, width: usize, nb_color: usize, content: Vec<Pixel>) -> Image {
         Image {
             image_type: image_type,
@@ -72,6 +80,13 @@ impl Display for Image {
     }
 }
 
+///Put an image in memory and stock it in an Image instance, this object will be change with other methods.
+/// # Example:
+/// ```
+/// let path = Path::new("./path_to_image.ppm");
+/// let mut image = new_with_file(path);
+/// println!("{}", image);
+/// ```
 pub fn new_with_file(filename: &Path) -> Image {
     let f = File::open(filename);
     let mut buffer = BufReader::new(f.unwrap());
@@ -124,6 +139,13 @@ pub fn new_with_file(filename: &Path) -> Image {
     new_image
 }
 
+///Take an Image in parameter. 
+/// Fetch the Image and invert it color.
+/// # Example:
+/// ```
+/// let mut image = new_with_file(path);
+/// image = invert(&mut image);
+/// ```
 pub fn invert(image: &mut Image) -> Image {
     let mut inverted: Vec<Pixel> = Vec::new();
     for c in image.content.iter_mut() {
@@ -140,10 +162,17 @@ pub fn invert(image: &mut Image) -> Image {
     }
 }
 
-pub fn grayscale(image: &mut Image) -> Image {
+/// Take an Image in parameter.
+/// Fetch the Image and put it in grayscale.
+/// # Example:
+/// ```
+/// let mut image = new_with_file(path);
+/// image = greyscale(&mut image);
+/// ```
+pub fn grayscale(image: &mut Image, method: u8) -> Image {
     let mut inverted: Vec<Pixel> = Vec::new();
     for c in image.content.iter_mut() {
-        c.grayscale(1);
+        c.grayscale(method);
         inverted.push(*c);
     }
 
@@ -156,6 +185,13 @@ pub fn grayscale(image: &mut Image) -> Image {
     }
 }
 
+///Take an Image in parameter. 
+/// Fetch The Image and devide size and quality of the Image by 4.
+/// # Example:
+/// ```
+/// let mut image = new_with_file(path);
+/// image = downscale(&mut image);
+/// ```
 pub fn downscale(image: &mut Image) -> Image {
     let mut i = 0;
     let mut downscaled: Vec<Pixel> = image.content.clone();
@@ -170,6 +206,13 @@ pub fn downscale(image: &mut Image) -> Image {
     }
 }
 
+///Take an Image in parameter.
+/// Fetch the Image and put upside down.
+/// # Example:
+/// ```
+/// let mut image = new_with_file(path);
+/// image = flip(&mut image);
+/// ```
 pub fn flip(image: &mut Image) -> Image {
     let mut flipped: Vec<Pixel> = image.content.clone();
     let mut i = 0;
@@ -189,7 +232,7 @@ pub fn flip(image: &mut Image) -> Image {
         nb_color: image.nb_color
     }
 }
-///it's the fonction to clear line
+
 fn clean_line(line: String) -> String {
     line.split('#').collect::<Vec<&str>>()[0].trim().to_string()
 }
@@ -233,7 +276,12 @@ fn read_p3_file(buffer: &mut BufReader<File>) -> Image {
         nb_color: nb_color
     }
 }
-///it's our function that return 42 it's executed in a python
+
+///Return 42. It is exposed and can be use in other language like Python.
+/// # Example:
+/// ```
+/// return 42;
+/// ```
 #[no_mangle]
 pub extern fn dummy() -> u8{
     return 42;

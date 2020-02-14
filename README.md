@@ -4,7 +4,23 @@ Collaborators: COUSIN Cecile, DELAUNAY Clement, DEPRAZ Clement, GIANOTTI Mathias
 
 ## Usage
 
+```rust
+extern crate ppm;
+use std::path::Path;
+use ppm::{new_with_file, flip, invert, greyscale, save};
 
+fn main() {
+    let path = Path::new("./path_to_input_image.ppm");
+    let mut image = ppm::new_with_file(path);
+    image = flip(&mut image);
+    image = invert(&mut image);
+    image = greyscale(&mut image);
+    image = save(&mut image);
+    println!("{}", image);
+    let output_path = Path::new("./path_to_output_image.ppm");
+    image.save(output_path).unwrap();
+}
+```
 
 ## Documentation
 
