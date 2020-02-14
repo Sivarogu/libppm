@@ -5,9 +5,9 @@ use colored::*;
 #[derive(Debug, Clone, Copy)]
 
 pub struct Pixel {
-    pub r: u8,
-    pub g: u8,
-    pub b: u8
+    r: u8,
+    g: u8,
+    b: u8
 }
 ///The pixel is compose of 3 shades of color, red, blue and green (RGB)
 impl Pixel {
@@ -69,10 +69,6 @@ impl Pixel {
             self.b = gray;
 
         }
-    }
-
-    pub fn to_slice(&self) -> [String; 3] {
-        [self.r.to_string(), self.g.to_string(), self.b.to_string()]
     }
 }
 ///return True if a pixel is equal to another 
