@@ -41,8 +41,8 @@ impl Pixel {
         self.b = gray;
     }
     
-    pub fn to_slice(&self) -> [u8; 3] {
-        [self.r, self.g, self.b]
+    pub fn to_slice(&self) -> [String; 3] {
+        [self.r.to_string(), self.g.to_string(), self.b.to_string()]
     }
 }
 
