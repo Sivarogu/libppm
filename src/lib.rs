@@ -140,10 +140,10 @@ pub fn invert(image: &mut Image) -> Image {
     }
 }
 
-pub fn grayscale(image: &mut Image) -> Image {
+pub fn grayscale(image: &mut Image, method: u8) -> Image {
     let mut inverted: Vec<Pixel> = Vec::new();
     for c in image.content.iter_mut() {
-        c.grayscale(1);
+        c.grayscale(method);
         inverted.push(*c);
     }
 
