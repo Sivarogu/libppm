@@ -1,5 +1,6 @@
 extern crate ppm;
 use ppm::Pixel;
+use ppm::dummy;
 
 #[test]
 fn test_struct_pixel()
@@ -35,7 +36,7 @@ fn test_invert_pixel()
 }
 
 #[test]
-fn test_grayscale1_pixel()
+fn test_grayscale_one_pixel()
 {
 
     let mut pixel = Pixel {
@@ -53,7 +54,7 @@ fn test_grayscale1_pixel()
 }
 
 #[test]
-fn test_grayscale2_pixel()
+fn test_grayscale_two_pixel()
 {
 
     let mut pixel = Pixel {
@@ -71,7 +72,7 @@ fn test_grayscale2_pixel()
 }
 
 #[test]
-fn test_grayscale3_pixel()
+fn test_grayscale_three_pixel()
 {
 
     let mut pixel = Pixel {
@@ -121,5 +122,13 @@ fn test_create_pixel()
 
     assert_eq!(pixel2, pixel);
 
+
+}
+
+#[test]
+fn test_dummy()
+{
+
+    assert_eq!(dummy(), 42);
 
 }
