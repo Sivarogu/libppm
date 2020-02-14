@@ -1,4 +1,6 @@
 use std::fmt::{self, Formatter, Display};
+extern crate colored;
+use colored::*;
 
 #[derive(Debug, Clone, Copy)]
 pub struct Pixel {
@@ -81,7 +83,10 @@ impl PartialEq for Pixel {
 
 impl Display for Pixel {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        write!(f, "RGB ({0}, {1}, {2}) 0x{3}{4}{5}",
+        write!(f, "{0}{1}{2} ({3}, {4}, {5}) 0x{6}{7}{8}",
+            "R".red().bold(),
+            "G".green().bold(),
+            "B".blue().bold(),
             self.r, self.g, self.b,
             format!("{:01$x}", self.r, 2),
             format!("{:01$x}", self.g, 2),
