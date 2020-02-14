@@ -38,37 +38,28 @@ impl Pixel {
     }
 ///Fonction to put the image in gray scale, it take an argument and use different methods depend of the argument
     pub fn grayscale(&mut self, methode: u8) {
-
+        let gray;
         if methode == 1 {
-
-            let gray = (0.21 * self.r as f32 + 0.72 * self.g as f32 + 0.07 * self.b as f32) as u8;
-            self.r = gray;
-            self.g = gray;
-            self.b = gray;
-
+            gray = (0.21 * self.r as f32 + 0.72 * self.g as f32 + 0.07 * self.b as f32) as u8;
         }
         else if methode == 2 {
-
-            let gray = (0.33 * self.r as f32 + 0.33 * self.g as f32 + 0.33 * self.b as f32) as u8;
-            self.r = gray;
-            self.g = gray;
-            self.b = gray;
-
+            gray = (self.r as f32 / 3. + self.g as f32 / 3. + self.b as f32 / 3.) as u8;
         }
         else {
+            let mut min = if self.r > self.g { self.g } else { self.r };
+            let mut max = if self.r > self.g { self.r } else { self.g };
 
-            let items = [self.r, self.g, self.b];
+            if self.b > max {
+                max = self.b
+            } else if self.b < min {
+                min = self.b
+            }
 
-            let (min, max) = items
-                             .iter()
-                             .fold((items[0], items[0]), |acc, &x| (acc.0.min(x), acc.1.max(x)));
-
-            let gray = ((max as f32 + min as f32) * 0.50) as u8;
-            self.r = gray;
-            self.g = gray;
-            self.b = gray;
-
+            gray = ((max as f32 + min as f32) / 2.) as u8;
         }
+        self.r = gray;
+        self.g = gray;
+        self.b = gray;
     }
 }
 ///return True if a pixel is equal to another 
